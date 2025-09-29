@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="uz">
+  <head>
+    <link rel="icon" type="osh-palov.jpg" href="/osh-plov.jpg" />
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Тўй Таклифномаси — Тўй Висол Оқшоми</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <style>
+      body {
+        font-family: "Playfair Display", serif;
+      }
+      .script-font {
+        font-family: "Great Vibes", cursive;
+      }
+
+      .fade-in {
+        animation: fadeIn 1.2s ease-out both;
+      }
+
+      .slide-up {
+        animation: slideUp 1s ease-out both;
+      }
+
+      @keyframes fadeIn {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+      }
+
+      @keyframes slideUp {
+        0% { transform: translateY(20px); opacity: 0; }
+        100% { transform: translateY(0); opacity: 1; }
+      }
+
+      #confetti-canvas {
+        position: fixed;
+        pointer-events: none;
+        inset: 0;
+        z-index: 60;
+      }
+
+      @media print {
+        #intro-modal, #audio-btn, #confetti-canvas, .share-row {
+          display: none !important;
+        }
+        body { background: white !important; }
+        #invitation {
+          box-shadow: none !important;
+          border: none !important;
+          max-width: 100% !important;
+        }
+      }
+    </style>
+  </head>
+
+  <body
+    class="bg-gradient-to-br from-yellow-100 via-white to-blue-100 text-center p-6 min-h-screen flex items-center justify-center"
+  >
+    <canvas id="confetti-canvas"></canvas>
+
+    <div
+      id="intro-modal"
+      class="fixed inset-0 bg-white bg-opacity-90 flex flex-col items-center justify-center z-50 text-center p-6 fade-in"
+      role="dialog"
+      aria-modal="true"
+    >
+      <h1 class="text-5xl script-font text-yellow-600 mb-4 slide-up">
+        Ассалому Алайкум
+      </h1>
+      <p class="text-xl text-gray-700 mb-6 slide-up">Сиз учун таклифнома</p>
+      <button
+        onclick="startInvitation()"
+        class="px-6 py-3 bg-yellow-600 text-white rounded-full shadow hover:bg-yellow-700 transition text-lg slide-up"
+      >
+        Таклифномани кўриш
+      </button>
+      <p class="mt-4 text-sm text-gray-500">
+        Тугмани босиб таклифномани очинг — кичик совға бор 🎁
+      </p>
+    </div>
+
+    <audio id="bg-audio" loop>
+      <source src="ozbegim.mp3" type="audio/mpeg" />
+      Браузерингиз аудио тэгини қўллаб-қувватламайди.
+    </audio>
+
+    <div
+      id="invitation"
+      class="hidden max-w-xl mx-auto bg-white p-8 rounded-3xl shadow-2xl border-yellow-200 border relative overflow-hidden fade-in"
+    >
+      <div
+        class="absolute w-36 h-36 bg-yellow-200 opacity-30 rounded-full top-[-50px] left-[-50px] -z-10 animate-pulse"
+      ></div>
+      <div
+        class="absolute w-36 h-36 bg-blue-200 opacity-30 rounded-full bottom-[-50px] right-[-50px] -z-10 animate-pulse"
+      ></div>
+
+      <h2 class="text-lg text-gray-700 italic mb-1 slide-up">
+        Аллоҳ уларни қалбини севги ила бирлаштирди
+      </h2>
+      <p class="text-sm text-gray-500 mb-4 slide-up">
+        <strong>Анфол сураси, 63-оят</strong>
+      </p>
+
+
+
+      <p class="text-gray-700 text-lg mb-4 leading-relaxed slide-up">
+        Ҳурматли азиз меҳмонимиз! <br />
+        Сизни азиз фарзандларимиз <br />
+              <div class="text-6xl script-font text-red-700 mb-4 slide-up">
+        Умар &amp; Умидахон
+      </div>
+        <span class="font-semibold text-yellow-600">Никоҳ тўйлари</span> муносабати билан<br />
+        <div class="text-4xl mt-2 script-font text-yellow-700 mb-4 slide-up">
+      Амру Маьруф (Oш)
+      </div>
+         дастурхонимизга лутфан таклиф этамиз.
+      </p>
+
+      <div class="text-gray-600 mb-4 space-y-1 text-base slide-up">
+        <div class="text-xl font-semibold text-gray-700">19-oktyabr 2025 йил</div>
+        <div><strong>Якшанба куни</strong></div>
+        <div><strong>Соат:</strong> --:00</div>
+      </div>
+
+      <p class="text-gray-700 mb-6 slide-up">
+        <strong>Манзил:</strong> Келес, «Замона» тўйхонаси
+      </p>
+
+      <p class="text-gray-700 italic mt-6 slide-up">
+        Ҳурмат ва эҳтиром ила <br />
+        <strong>Анваржон ота ўғли Фазлиддин Мадрахимовлар оиласи</strong>
+      </p>
+
+      <div class="my-6 ">
+        <button
+          id="audio-btn"
+          onclick="toggleAudio()"
+          type="button"
+          class="flex items-center gap-2 justify-center text-white bg-red-700 hover:bg-red-800 font-medium rounded-lg text-sm px-5 py-2.5 transition"
+        >
+          <i id="audio-icon" data-feather="pause"></i>
+          Мусиқани тўхтатиш
+        </button>
+      </div>
+
+      <div
+        class="flex flex-col sm:flex-row gap-2 items-center justify-center share-row"
+      >
+        <a
+  href="https://yandex.uz/maps/org/180038073888/?ll=69.206587%2C41.380444&z=16.15" 
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-sm inline-flex items-center gap-2 text-gray-700 hover:underline"
+        >
+          <i data-feather="map-pin"></i> Жойни кўриш
+        </a>
+
+        <button
+          onclick="shareInvite()"
+          class="text-sm inline-flex items-center gap-2 text-gray-700 hover:underline"
+        >
+          <i data-feather="share-2"></i> Таклифни улашиш
+        </button>
+      </div>
+    </div>
+
+    <script>
+      feather.replace();
+
+      const audio = document.getElementById("bg-audio");
+      const audioBtn = document.getElementById("audio-btn");
+
+      function startInvitation() {
+        document.getElementById("intro-modal").style.display = "none";
+        document.getElementById("invitation").classList.remove("hidden");
+        audio.play().catch(() => {});
+        fireConfetti();
+      }
+
+      function toggleAudio() {
+        if (audio.paused) {
+          audio.play();
+          audioBtn.innerHTML =
+            '<i data-feather="pause"></i> Мусиқани тўхтатиш';
+        } else {
+          audio.pause();
+          audioBtn.innerHTML =
+            '<i data-feather="play"></i> Мусиқани ёқиш';
+        }
+        feather.replace();
+      }
+
+      function shareInvite() {
+        const shareData = {
+          title: "Никоҳ Тўйи — Таклифнома",
+          text: "Умар ва Умидахон никоҳ тўйига таклифнома",
+          url: window.location.href,
+        };
+        if (navigator.share) {
+          navigator.share(shareData).catch(() => {});
+        } else {
+          navigator.clipboard
+            .writeText(`${shareData.title}\n${shareData.text}\n${shareData.url}`)
+            .then(() => alert("Таклифнома ҳаволаси нусхаланди."))
+            .catch(() => alert("Ҳаволани нусхалашда муаммо юз берди."));
+        }
+      }
+
+      function fireConfetti() {
+        const canvas = document.getElementById("confetti-canvas");
+        const ctx = canvas.getContext("2d");
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        const pieces = [];
+        const colors = ["#F59E0B", "#F97316", "#60A5FA", "#93C5FD", "#FDE68A", "#FDBA74"];
+        for (let i = 0; i < 100; i++) {
+          pieces.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height - canvas.height,
+            w: 6,
+            h: 8,
+            c: colors[Math.floor(Math.random() * colors.length)],
+            s: 2 + Math.random() * 3
+          });
+        }
+        function update() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          for (let p of pieces) {
+            p.y += p.s;
+            if (p.y > canvas.height) p.y = -10;
+            ctx.fillStyle = p.c;
+            ctx.fillRect(p.x, p.y, p.w, p.h);
+          }
+          requestAnimationFrame(update);
+        }
+        update();
+      }
+    </script>
+  </body>
+</html>
