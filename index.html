@@ -165,13 +165,9 @@
     <script>
       feather.replace();
 
-      const audio = document.getElementById("bg-audio");
-      const audioBtn = document.getElementById("audio-btn");
-
       function startInvitation() {
         document.getElementById("intro-modal").style.display = "none";
         document.getElementById("invitation").classList.remove("hidden");
-        audio.play().catch(() => {});
         fireConfetti();
       }
 
