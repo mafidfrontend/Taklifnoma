@@ -117,7 +117,7 @@
         Ҳурматли азиз меҳмонимиз! <br />
         Сизни азиз фарзандларимиз <br />
               <div class="text-6xl script-font text-red-700 mb-4 slide-up">
-        Умар &amp; Умидахон
+        Умаржон &amp; Умидахон
       </div>
         <span class="font-semibold text-yellow-600">Никоҳ тўйлари</span> муносабати билан<br />
         <div class="text-4xl mt-2 script-font text-yellow-700 mb-4 slide-up">
@@ -129,7 +129,7 @@
       <div class="text-gray-600 mb-4 space-y-1 text-base slide-up">
         <div class="text-xl font-semibold text-gray-700">2025 йил 19-oktyabr</div>
         <div><strong>Якшанба куни</strong></div>
-        <div><strong>Соат:</strong> --:00</div>
+        <div><strong>Соат:</strong> 08:30</div>
       </div>
 
       <p class="text-gray-700 mb-6 slide-up">
@@ -140,18 +140,6 @@
         Ҳурмат ва эҳтиром ила <br />
         <strong>Анваржон ота ўғли Фазлиддин Мадрахимовлар оиласи</strong>
       </p>
-
-      <div class="my-6 ">
-        <button
-          id="audio-btn"
-          onclick="toggleAudio()"
-          type="button"
-          class="flex items-center gap-2 justify-center text-white bg-red-700 hover:bg-red-800 font-medium rounded-lg text-sm px-5 py-2.5 transition"
-        >
-          <i id="audio-icon" data-feather="pause"></i>
-          Мусиқани тўхтатиш
-        </button>
-      </div>
 
       <div
         class="flex flex-col sm:flex-row gap-2 items-center justify-center share-row"
@@ -185,19 +173,6 @@
         document.getElementById("invitation").classList.remove("hidden");
         audio.play().catch(() => {});
         fireConfetti();
-      }
-
-      function toggleAudio() {
-        if (audio.paused) {
-          audio.play();
-          audioBtn.innerHTML =
-            '<i data-feather="pause"></i> Мусиқани тўхтатиш';
-        } else {
-          audio.pause();
-          audioBtn.innerHTML =
-            '<i data-feather="play"></i> Мусиқани ёқиш';
-        }
-        feather.replace();
       }
 
       function shareInvite() {
